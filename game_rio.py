@@ -54,16 +54,28 @@ while running:
         player.x -= player_speed
     if keys[pygame.K_RIGHT]:
         player.x += player_speed
-    if keys[pygame.K_SPACE] and not player_jump:
+    if keys[pygame.K_UP] and not player_jump:  # added condition for up arrow key
         player_jump = True
-        player_jump_count = 0
+        player_jump_count = 1
 
-    # apply gravity to the player
+    # apply gravity to the player while jumping
     if player_jump:
         player_y -= player_jump_height - player_jump_count
         player_jump_count += 5
-        if player_jump_count == player_jump_height:
+        if player_jump_count == player_jump_height or player_y > screen_height - player_height - ground_height:
             player_jump = False
+
+
+    # apply gravity to the player while not jumping
+    if not player_jump:
+        player_y += 5
+
+    # keep the player within the screen bounds
+    if player_y > screen_height - player_height - ground_height:
+        player_y = screen_height - player_height - ground_height
+
+    # update the player's position
+    player.y = player_y
 
     # spawn obstacles
     if len(obstacles) < 3:
