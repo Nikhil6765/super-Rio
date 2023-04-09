@@ -9,7 +9,7 @@ screen_height = 480
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 # set the caption of the window
-pygame.display.set_caption("Super Pygame")
+pygame.display.set_caption("Super_Rio")
 
 # set up the clock
 clock = pygame.time.Clock()
